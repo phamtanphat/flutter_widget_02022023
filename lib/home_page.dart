@@ -14,7 +14,32 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      body: Container(),
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: Colors.black),
+                    )
+                  ),
+                  child: Text("1"),
+                )
+            ),
+            Expanded(
+                flex: 7,
+                child: Container(
+
+                )
+            )
+          ],
+        ),
+      ),
     );
   }
 }
