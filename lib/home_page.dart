@@ -14,30 +14,36 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: Colors.black),
-                    )
-                  ),
-                  child: Text("1"),
-                )
-            ),
-            Expanded(
-                flex: 7,
-                child: Container(
-
-                )
-            )
-          ],
+      body: SafeArea(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                child: Stack(
+                  clipBehavior: Clip.hardEdge,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 200,
+                      color: Colors.red,
+                      child: Text("View A"),
+                    ),
+                    Positioned(
+                      left: -10,
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.blue,
+                        child: Text("View B"),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
         ),
       ),
     );
