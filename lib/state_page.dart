@@ -16,6 +16,7 @@ class _StatePageState extends State<StatePage> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text("State Page"),
@@ -26,18 +27,19 @@ class _StatePageState extends State<StatePage> {
         child: Column(
           children: [
             TextField(
+              keyboardType: TextInputType.number,
+              maxLength: 5,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Input number 1",
-                suffixIcon: InkWell(
-                  onTap: () {
-                    print("Click icon");
-                  },
-                  child: Icon(Icons.lock),
-                )
               ),
             ),
             TextField(),
+            Container(
+                margin: EdgeInsets.fromLTRB(0,  height / 20, 0, 0),
+                child: Text("Result")
+            ),
+            ElevatedButton(onPressed: () {}, child: Text("+"))
           ],
         ),
       ),
