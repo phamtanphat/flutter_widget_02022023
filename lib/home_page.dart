@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text("View A"),
                     ),
                     Positioned(
-                      left: -10,
+                      top: -10,
                       child: Container(
                         width: 100,
                         height: 100,
