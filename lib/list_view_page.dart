@@ -24,7 +24,29 @@ class _ListViewPageState extends State<ListViewPage> {
       appBar: AppBar(
         title: Text("List View Page"),
       ),
-      body: Container(),
+      body: Container(
+        color: Colors.blue,
+        constraints: BoxConstraints.expand(),
+        child: ListView.builder(
+            itemCount: listUsers.length,
+            itemBuilder: (_, index) {
+              return Card(
+                child: ListTile(
+                  title: Text("Name: ${listUsers[index].name}"),
+                  subtitle: Text("Age: ${listUsers[index].age} jewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasdajewjwjdqosasdasdasdasdasda",
+                    textAlign: TextAlign.justify,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                  leading: Image.network(
+                    "https://user-images.githubusercontent.com/51419598/152648731-567997ec-ac1c-4a9c-a816-a1fb1882abbe.png",
+                  ),
+
+                ),
+              );
+            }
+        ),
+      ),
     );
   }
 }
