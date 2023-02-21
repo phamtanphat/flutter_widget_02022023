@@ -17,6 +17,7 @@ class _StatePageState extends State<StatePage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final space = height / 50;
     return Scaffold(
       appBar: AppBar(
         title: Text("State Page"),
@@ -32,14 +33,41 @@ class _StatePageState extends State<StatePage> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Input number 1",
+                counterText: ""
               ),
             ),
-            TextField(),
+            SizedBox(
+              height: space,
+            ),
+            TextField(
+              keyboardType: TextInputType.number,
+              maxLength: 5,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Input number 2",
+                counterText: ""
+              ),
+            ),
             Container(
-                margin: EdgeInsets.fromLTRB(0,  height / 20, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, space, 0, 0),
                 child: Text("Result")
             ),
-            ElevatedButton(onPressed: () {}, child: Text("+"))
+            SizedBox(height: space),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: () {}, child: Text("+")),
+                ElevatedButton(onPressed: () {}, child: Text("-")),
+              ],
+            ),
+            SizedBox(height: space),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: () {}, child: Text("x")),
+                ElevatedButton(onPressed: () {}, child: Text("/")),
+              ],
+            )
           ],
         ),
       ),
