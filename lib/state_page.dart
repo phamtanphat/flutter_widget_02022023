@@ -9,9 +9,14 @@ class StatePage extends StatefulWidget {
 // State Object
 class _StatePageState extends State<StatePage> {
 
+  late TextEditingController inputNumber1Controller, inputNumber2Controller;
+  num result = 0;
+
   @override
   void initState() {
     super.initState();
+    inputNumber1Controller = TextEditingController();
+    inputNumber2Controller = TextEditingController();
   }
 
   @override
@@ -20,17 +25,18 @@ class _StatePageState extends State<StatePage> {
     final space = height / 50;
     return Scaffold(
       appBar: AppBar(
-        title: Text("State Page"),
+        title: const Text("State Page"),
       ),
       body: Container(
-        padding: EdgeInsets.all(5),
-        constraints: BoxConstraints.expand(),
+        padding: const EdgeInsets.all(5),
+        constraints: const BoxConstraints.expand(),
         child: Column(
           children: [
             TextField(
               keyboardType: TextInputType.number,
               maxLength: 5,
-              decoration: InputDecoration(
+              controller: inputNumber1Controller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Input number 1",
                 counterText: ""
@@ -42,7 +48,8 @@ class _StatePageState extends State<StatePage> {
             TextField(
               keyboardType: TextInputType.number,
               maxLength: 5,
-              decoration: InputDecoration(
+              controller: inputNumber2Controller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Input number 2",
                 counterText: ""
@@ -50,22 +57,35 @@ class _StatePageState extends State<StatePage> {
             ),
             Container(
                 margin: EdgeInsets.fromLTRB(0, space, 0, 0),
-                child: Text("Result")
+                child: Text("Result: $result")
             ),
             SizedBox(height: space),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text("+")),
-                ElevatedButton(onPressed: () {}, child: Text("-")),
+                ElevatedButton(onPressed: () {
+                  int number1 = int.parse(inputNumber1Controller.text);
+                  int number2 = int.parse(inputNumber2Controller.text);
+                  result = number1 + number2;
+                  setState(() {
+
+                  });
+                }, child: const Text("+")),
+                ElevatedButton(onPressed: () {
+
+                }, child: const Text("-")),
               ],
             ),
             SizedBox(height: space),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text("x")),
-                ElevatedButton(onPressed: () {}, child: Text("/")),
+                ElevatedButton(onPressed: () {
+
+                }, child: const Text("x")),
+                ElevatedButton(onPressed: () {
+
+                }, child: const Text("/")),
               ],
             )
           ],
