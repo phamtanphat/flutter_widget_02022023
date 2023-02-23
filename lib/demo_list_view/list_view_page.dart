@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);
@@ -14,12 +13,7 @@ class _ListViewPageState extends State<ListViewPage> {
   @override
   void initState() {
     super.initState();
-    DateFormat('kk:mm:ss \n EEE d MMM').format(now);
-    listUsers = List.generate(
-        10, (index) => User("User ${index + 1}", "${index + 10}"));
-    listUsers.forEach((element) {
-      print(element.toString());
-    });
+    listUsers = List.generate(10, (index) => User("User ${index + 1}", "${index + 1}")).reversed.toList();
   }
 
   @override
@@ -27,13 +21,43 @@ class _ListViewPageState extends State<ListViewPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("List View Page"),
+        actions: [
+          InkWell(
+            child: Icon(Icons.add),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('AlertDialog Title'),
+                      content: Text("Alert!!!"),
+                      actions: [
+                        TextButton(
+                            onPressed: (){
+
+                            },
+                            child: Text("Ok")
+                        ),
+                        TextButton(
+                            onPressed: (){
+
+                            },
+                            child: Text("Cancel")
+                        ),
+                      ],
+                    );
+                  }
+              );
+            },
+          )
+        ],
       ),
       body: Container(
         color: Colors.blue,
         constraints: BoxConstraints.expand(),
         child: ListView.builder(
             itemCount: listUsers.length,
-            itemBuilder: (_, index) {
+            itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
                   title: Text("Name: ${listUsers[index].name}"),
@@ -43,12 +67,21 @@ class _ListViewPageState extends State<ListViewPage> {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
+                  trailing: InkWell(
+                    child: Icon(Icons.delete, color: Colors.red),
+                    onTap: () {
+                      setState(() {
+                        // listUsers.removeAt(index);
+                      });
+                    },
+                  ),
                   leading: Image.network(
                     "https://user-images.githubusercontent.com/51419598/152648731-567997ec-ac1c-4a9c-a816-a1fb1882abbe.png",
                   ),
                 ),
               );
-            }),
+            }
+        )
       ),
     );
   }
@@ -64,26 +97,4 @@ class User {
   String toString() {
     return 'User{name: $name, age: $age}';
   }
-}
-
-class Store {
-  late String imageUrl;
-  late String name;
-  late String address;
-  late String distance;
-  late List<CategoryEnum> listCategoryEnum;
-  late String sale;
-  late num openTime;
-  late num closeTime;
-}
-
-enum CategoryEnum {
-  restaurant("Nhà hàng"),
-  birthday("Sinh nhật"),
-  family("Gia đình"),
-  group("Nhóm hội"),
-  buffet("Buffet");
-
-  final String name;
-  const CategoryEnum(this.name);
 }
