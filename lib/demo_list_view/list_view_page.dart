@@ -13,7 +13,7 @@ class _ListViewPageState extends State<ListViewPage> {
   @override
   void initState() {
     super.initState();
-    listUsers = List.generate(10, (index) => User("User ${index + 1}", "${index + 1}")).reversed.toList();
+    listUsers = List.generate(10, (index) => User("User ${index + 1}", "${index + 1}")).toList();
   }
 
   @override
@@ -25,26 +25,71 @@ class _ListViewPageState extends State<ListViewPage> {
           InkWell(
             child: Icon(Icons.add),
             onTap: () {
+              String name = "";
+              String age = "";
               showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      title: const Text('AlertDialog Title'),
-                      content: Text("Alert!!!"),
-                      actions: [
-                        TextButton(
-                            onPressed: (){
+                    return Dialog(
+                      child: Container(
+                        margin: EdgeInsets.all(15),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Center(
+                                child: Text(
+                                    "ADD NEW USER",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red
+                                    )
+                                )
+                            ),
+                            SizedBox(height: 10),
+                            TextField(
+                              onChanged: (text) => name = text,
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "Input name",
+                                  counterText: ""
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            TextField(
+                              onChanged: (text) => age = text,
+                              keyboardType: TextInputType.number,
+                              maxLength: 2,
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "Input age",
+                                  counterText: ""
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                       setState(() {
+                                         listUsers.add(User(name, age));
+                                         Navigator.pop(context);
+                                       });
+                                    },
+                                    child: Text("Add")
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {
 
-                            },
-                            child: Text("Ok")
+                                    },
+                                    child: Text("Cancel")
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            child: Text("Cancel")
-                        ),
-                      ],
+                      ),
                     );
                   }
               );
@@ -56,6 +101,8 @@ class _ListViewPageState extends State<ListViewPage> {
         color: Colors.blue,
         constraints: BoxConstraints.expand(),
         child: ListView.builder(
+          controller: ,
+            reverse: true,
             itemCount: listUsers.length,
             itemBuilder: (context, index) {
               return Card(
