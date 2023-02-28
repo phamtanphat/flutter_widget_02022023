@@ -101,7 +101,6 @@ class _ListViewPageState extends State<ListViewPage> {
         color: Colors.blue,
         constraints: BoxConstraints.expand(),
         child: ListView.builder(
-          controller: ,
             reverse: true,
             itemCount: listUsers.length,
             itemBuilder: (context, index) {
