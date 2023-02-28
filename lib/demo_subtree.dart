@@ -14,8 +14,8 @@ class _DemoSubTreePageState extends State<DemoSubTreePage> {
   @override
   void initState() {
     super.initState();
-    listWidget.add(UniqueColorWidget());
-    listWidget.add(UniqueColorWidget());
+    listWidget.add(SizedBox(child: UniqueColorWidget(GlobalKey())));
+    listWidget.add(SizedBox(child: UniqueColorWidget(GlobalKey())));
   }
 
   void swapWidget() {
@@ -49,8 +49,23 @@ class _DemoSubTreePageState extends State<DemoSubTreePage> {
   }
 }
 
-class UniqueColorWidget extends StatelessWidget {
-  final Color color = getColor();
+class UniqueColorWidget extends StatefulWidget {
+
+  UniqueColorWidget(Key key): super(key: key);
+
+  @override
+  State<UniqueColorWidget> createState() => _UniqueColorWidgetState();
+
+  static Color getColor() {
+    var random = Random();
+    return Color.fromARGB(250, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+  }
+
+}
+
+class _UniqueColorWidgetState extends State<UniqueColorWidget> {
+  final Color color = UniqueColorWidget.getColor();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,10 +74,6 @@ class UniqueColorWidget extends StatelessWidget {
       color: color,
     );
   }
-
-  static Color getColor() {
-    var random = Random();
-    return Color.fromARGB(250, random.nextInt(255), random.nextInt(255), random.nextInt(255));
-  }
 }
+
 
